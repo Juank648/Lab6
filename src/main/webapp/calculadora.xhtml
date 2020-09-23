@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+ <h:head></h:head>
+ <h:body>
+		<h:form id="calculadora_form">
+			<h1>Inserte su lista de números aquí: ej(4.67;56;45.89)</h1>
+			<p:outputLabel value="#{calculadoraBean.mode}" style="display: none;"></p:outputLabel>    
+			<p:inputText id="output1" value="#{calculadoraBean.cantidadNumeros}"/>
+			<p:outputLabel value="#{calculadoraBean.convertirString()}" style="display: none;"></p:outputLabel> 
+			
+			<p:panelGrid columns="2">
+				
+				<p:outputLabel id="moda" value="Media #{calculadoraBean.media}"></p:outputLabel>
+				<p:outputLabel id="DesviacionEstandar" value="DesviacionEstandar #{calculadoraBean.standardDesviation}"></p:outputLabel>
+				<p:outputLabel id="Varianza" value="Varianza #{calculadoraBean.variance}"></p:outputLabel>
+				<p:outputLabel id="Moda" value="Moda #{calculadoraBean.mode}"></p:outputLabel>
+				<p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateMean}" value="Calcular Media"/>
+				<p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateStandardDeviation}" value="Calcular Desviacion Estandar"/>
+				<p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateVariance}" value="Calcular Varianza"/>
+				<p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.calculateMode}" value="Calcular Moda"/>
+				<p:commandButton update="calculadora_form" actionListener="#{calculadoraBean.restart}" value="Reiniciar"/>
+			</p:panelGrid>
+			
+
+		</h:form>
+ </h:body>
+</html>
