@@ -6,7 +6,7 @@
 
   <groupId>edu.eci.cvds</groupId>
   <artifactId>Faces</artifactId>
-  <version>1.0</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>Faces Maven Webapp</name>
@@ -37,6 +37,12 @@
 		<artifactId>jsf-impl</artifactId>
 		<version>2.2.20</version>
 	</dependency>
+		<dependency>
+		<groupId>javax</groupId>
+		<artifactId>javaee-api</artifactId>
+		<version>8.0.1</version>
+		<scope>provided</scope>
+	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
 	<dependency>
 		<groupId>com.sun.faces</groupId>
@@ -44,63 +50,34 @@
 		<version>2.2.20</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
-	<dependency>
-		<groupId>javax</groupId>
-		<artifactId>javaee-api</artifactId>
-		<version>8.0</version>
-		<scope>provided</scope>
-	</dependency>
+	
 	<dependency>
         <groupId>org.primefaces</groupId>
         <artifactId>primefaces</artifactId>
-        <version>7.0</version>
+        <version>8.0</version>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>Faces</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-		 <!-- Tomcat embedded plugin. -->
+   <plugins>
        <plugin>
-           <groupId>org.apache.tomcat.maven</groupId>
-           <artifactId>tomcat7-maven-plugin</artifactId>
-           <version>2.2</version>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <version>3.8.0</version>
            <configuration>
-               <port>8080</port>
-               <path>/</path>
+               <source>1.8</source>
+               <target>1.8</target>
            </configuration>
        </plugin>
-	   <!-- Plugin configuration for Heroku compatibility. -->
+       <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-war-plugin</artifactId>
+           <version>2.3</version>
+           <configuration>
+               <failOnMissingWebXml>false</failOnMissingWebXml>
+           </configuration>
+       </plugin>
+<!-- Plugin configuration for Heroku compatibility. -->
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
@@ -126,7 +103,17 @@
 
             </executions>
         </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
+
+       <!-- Tomcat embedded plugin. -->
+       <plugin>
+           <groupId>org.apache.tomcat.maven</groupId>
+           <artifactId>tomcat7-maven-plugin</artifactId>
+           <version>2.2</version>
+           <configuration>
+               <port>8080</port>
+               <path>/</path>
+           </configuration>
+       </plugin>
+   </plugins>
+</build>
 </project>
